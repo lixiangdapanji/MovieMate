@@ -199,15 +199,12 @@ public final class QueryUtils {
                 // Get a single movie at position i within the list of movies
                 JSONObject currentMovie = movieArray.getJSONObject(i);
 
+                long id = currentMovie.getLong("id");
+                String title = currentMovie.getString("title");
+                String posterPath = currentMovie.getString("poster_path");
+                String overview = currentMovie.getString("overview");
+                String releaseDate = currentMovie.getString("release_date");
 
-                JSONObject properties = currentMovie.getJSONObject("properties");
-
-
-                long id = properties.getLong("id");
-                String title = properties.getString("title");
-                String posterPath = properties.getString("poster_path");
-                String overview = properties.getString("overview");
-                String releaseDate = properties.getString("release_date");
                 String trailerPath = null;
                 List<String> subscribeAvailable = null;
 
