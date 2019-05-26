@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MovieMate</string>
+    <string name="login">LOG IN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="signupnow">Don"'"t have an account? Sign up!</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
 </resources>
