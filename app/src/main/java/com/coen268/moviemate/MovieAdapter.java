@@ -1,13 +1,15 @@
 package com.coen268.moviemate;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,11 +21,11 @@ import java.util.List;
  * to be displayed to the user.
  */
 public class MovieAdapter extends PagerAdapter {
-    List<Integer> listImages;
+    List<String> listImages;
     Context context;
     LayoutInflater layoutInflater;
 
-    public MovieAdapter(List<Integer> listImages, Context context) {
+    public MovieAdapter(List<String> listImages, Context context) {
         this.listImages = listImages;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
@@ -45,19 +47,28 @@ public class MovieAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
+
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = layoutInflater.inflate(R.layout.moive_list_item, container, false);
-        ImageView imageView = view.findViewById(R.id.imageView);
-        imageView.setImageResource(listImages.get(position));
-        container.addView(view);
+        LayoutInflater inflater = (LayoutInflater) container.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.moive_list_item,null);
+        ((ViewPager) container).addView(view);
+        final ImageView img = (ImageView) view.findViewById(R.id.imageView);
+        Picasso.get()
+                .load(listImages.get(position))
+                //.placeholder()
+                .centerCrop()
+                .fit()
+                .into(img);
+
+
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "memeda", Toast.LENGTH_SHORT).show();
             }
         });
-
         return view;
     }
 }

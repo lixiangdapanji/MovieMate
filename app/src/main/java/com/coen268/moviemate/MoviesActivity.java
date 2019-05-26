@@ -37,7 +37,7 @@ public class MoviesActivity extends AppCompatActivity {
             "https://api.themoviedb.org/3/movie/" + movie_id + "?api_key=" + API_KEY + "&append_to_response=videos";
 
     List<Movie> movieList = new ArrayList<>();
-    List<Integer> litImages = new ArrayList<>();
+    List<String> litImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,9 @@ public class MoviesActivity extends AppCompatActivity {
 
         private void getPosterList(List<Movie> movieList) {
             String  IMAGE_BASE_URI = "https://image.tmdb.org/t/p/w500/";
+            for (Movie m : movieList) {
+                litImages.add( IMAGE_BASE_URI + m.posterPath);
+            }
         }
 
         public  Boolean networkStatus(Context context){
