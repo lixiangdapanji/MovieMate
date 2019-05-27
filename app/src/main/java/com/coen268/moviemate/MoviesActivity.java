@@ -32,9 +32,6 @@ public class MoviesActivity extends AppCompatActivity {
     private static final String SIMILAR_MOIVES_URL =
             "https://api.themoviedb.org/3/movie/" + movie_id +"/similar?api_key=" + API_KEY + "&page=2";
 
-    /** URL for one movie data */
-    private static final String MOVIE_TRAILER_URL =
-            "https://api.themoviedb.org/3/movie/" + movie_id + "?api_key=" + API_KEY + "&append_to_response=videos";
 
     List<Movie> movieList = new ArrayList<>();
     List<String> litImages = new ArrayList<>();

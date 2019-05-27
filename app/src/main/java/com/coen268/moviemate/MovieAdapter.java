@@ -1,6 +1,7 @@
 package com.coen268.moviemate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -48,6 +49,9 @@ public class MovieAdapter extends PagerAdapter {
     }
 
 
+
+    /**fetch the images with Picasso from URL
+     * */
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = (LayoutInflater) container.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -61,12 +65,12 @@ public class MovieAdapter extends PagerAdapter {
                 .fit()
                 .into(img);
 
-
-
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "memeda", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(context, MovieInfoActivity.class);
+                intent.putExtra("your_extra","your_class_value");
+                context.startActivity(intent);
             }
         });
         return view;
