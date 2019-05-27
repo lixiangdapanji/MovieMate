@@ -274,5 +274,9 @@ public class MateProvider extends ContentProvider {
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
     }
+
+    public boolean checkUserExist(String toString, String toString1) {
+        return true;
+    }
 }
 
