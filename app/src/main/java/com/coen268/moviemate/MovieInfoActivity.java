@@ -1,9 +1,8 @@
 package com.coen268.moviemate;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-public class MovieInfoActivity extends AppCompatActivity {
+public class MovieInfoActivity extends BaseActivity {
 
     public static final String LOG_TAG = MovieInfoActivity.class.getSimpleName();
 
