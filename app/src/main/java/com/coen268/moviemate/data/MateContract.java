@@ -29,19 +29,19 @@ public final class MateContract {
 
     /**
      * Possible path (appended to base content URI for possible URI's)
-     * For instance, content://com.example.android.pets/pets/ is a valid path for
-     * looking at pet data. content://com.example.android.pets/staff/ will fail,
+     * For instance, content://com.example.android.mates/mates/ is a valid path for
+     * looking at mate data. content://com.example.android.mates/staff/ will fail,
      * as the ContentProvider hasn't been given any information on what to do with "staff".
      */
     public static final String PATH_MATES = "mates";
 
     /**
-     * Inner class that defines constant values for the pets database table.
-     * Each entry in the table represents a single pet.
+     * Inner class that defines constant values for the mates database table.
+     * Each entry in the table represents a single mate.
      */
     public static final class MateEntry implements BaseColumns {
 
-        /** The content URI to access the pet data in the provider */
+        /** The content URI to access the mate data in the provider */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_MATES);
 
         /**

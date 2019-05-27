@@ -33,7 +33,7 @@ public class MateDbHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create a String that contains the SQL statement to create the pets table
+        // Create a String that contains the SQL statement to create the mates table
         String SQL_CREATE_MATE_TABLE =  "CREATE TABLE " + MateEntry.TABLE_NAME_MATE + " ("
                 + MateEntry.MATE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MateEntry.COLUMN_MATE_NAME + " TEXT NOT NULL, "

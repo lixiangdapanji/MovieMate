@@ -19,16 +19,16 @@ public class MateProvider extends ContentProvider {
     /** Tag for the log messages */
     public static final String LOG_TAG = MateProvider.class.getSimpleName();
 
-    /** URI matcher code for the content URI for the pets table */
+    /** URI matcher code for the content URI for the mates table */
     private static final int MATES = 100;
 
-    /** URI matcher code for the content URI for a single pet in the pets table */
+    /** URI matcher code for the content URI for a single mate in the mates table */
     private static final int MATE_ID = 101;
 
-    /** URI matcher code for the content URI for the pets table */
+    /** URI matcher code for the content URI for the user movie table */
     private static final int MATE_MOVIES = 200;
 
-    /** URI matcher code for the content URI for a single pet in the pets table */
+    /** URI matcher code for the content URI for a single movie in the user movie table */
     private static final int MATE_MOVIE_ID = 201;
 
     /**
@@ -72,15 +72,15 @@ public class MateProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case MATES:
-                // For the MATES code, query the pets table directly with the given
+                // For the MATES code, query the mate table directly with the given
                 // projection, selection, selection arguments, and sort order. The cursor
-                // could contain multiple rows of the pets table.
+                // could contain multiple rows of the mate table.
                 cursor = database.query(MateEntry.TABLE_NAME_MATE, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
             case MATE_ID:
                 // For the MATE_ID code, extract out the ID from the URI.
-                // For an example URI such as "content://com.example.android.pets/pets/3",
+                // For an example URI such as "content://com.example.android.mate/mate/3",
                 // the selection will be "_id=?" and the selection argument will be a
                 // String array containing the actual ID of 3 in this case.
                 //
@@ -90,7 +90,7 @@ public class MateProvider extends ContentProvider {
                 selection = MateEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
 
-                // This will perform a query on the pets table where the _id equals 3 to return a
+                // This will perform a query on the mate table where the _id equals 3 to return a
                 // Cursor containing that row of the table.
                 cursor = database.query(MateEntry.TABLE_NAME_MATE, projection, selection, selectionArgs,
                         null, null, sortOrder);
@@ -137,7 +137,7 @@ public class MateProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        // Insert the new pet with the given values
+        // Insert the new mate with the given values
         long id = database.insert(MateEntry.TABLE_NAME_MATE, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
@@ -167,7 +167,7 @@ public class MateProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        // Insert the new pet with the given values
+        // Insert the new movie with the given values
         long id = database.insert(MateEntry.TABLE_NAME_MATE_MOVIE, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
@@ -200,7 +200,7 @@ public class MateProvider extends ContentProvider {
 
     /**
      * Update mates in the database with the given content values. Apply the changes to the rows
-     * specified in the selection and selection arguments (which could be 0 or 1 or more pets).
+     * specified in the selection and selection arguments (which could be 0 or 1 or more mates).
      * Return the number of rows that were successfully updated.
      */
     private int updateUser(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
@@ -252,6 +252,8 @@ public class MateProvider extends ContentProvider {
                 // Delete a single row given by the ID in the URI
                 selection = MateEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                return database.delete(MateEntry.TABLE_NAME_MATE, selection, selectionArgs);
+            case MATE_MOVIES:
                 return database.delete(MateEntry.TABLE_NAME_MATE, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
