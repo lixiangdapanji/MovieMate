@@ -46,7 +46,7 @@ public class MateDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_MATE_MOVIE_TABLE =  "CREATE TABLE " + MateEntry.TABLE_NAME_MATE_MOVIE + " ("
                 + MateEntry.MATE_MOVIE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MateEntry.COLUMN_MOVIE_NAME + " TEXT NOT NULL, "
-                + MateEntry.COLUMN_MOVIE_ID + " TEXT);";
+                + MateEntry.COLUMN_MOVIE_MATE_NAME + " TEXT NOT NULL);";
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_MATE_MOVIE_TABLE);
