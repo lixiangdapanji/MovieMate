@@ -67,9 +67,10 @@ public class MovieAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(context, MovieInfoActivity.class);
-                intent.putExtra("your_extra","your_class_value");
-                context.startActivity(intent);
+//                Intent intent= new Intent(context, MovieInfoActivity.class);
+//                intent.putExtra("your_extra","your_class_value");
+//                context.startActivity(intent);
+                Toast.makeText(context, "meemda", Toast.LENGTH_SHORT).show();
             }
         });
         return view;
