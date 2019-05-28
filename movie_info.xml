@@ -1,0 +1,126 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="24dp"
+    android:paddingTop="24dp"
+    android:visibility="visible"
+    android:layout_gravity="top">
+
+
+    <Button
+        android:id="@+id/nav_button"
+        android:layout_width="73dp"
+        android:layout_height="47dp"
+        android:layout_gravity="left"
+        android:background="@drawable/hb" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Movie name"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"/>
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="212dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="7dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="41dp"
+                android:layout_height="39dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/heart" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="41dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="123"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="44dp"
+                android:layout_height="39dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/dislike" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="39dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="123"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="87dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="4dp"
+            android:layout_height="49dp"
+            android:layout_weight="1"
+            android:background="@drawable/heart" />
+
+        <ImageButton
+            android:id="@+id/button3"
+            android:layout_width="2dp"
+            android:layout_height="49dp"
+            android:layout_weight="1"
+            android:background="@drawable/dislike" />
+
+        <ImageButton
+            android:id="@+id/button4"
+            android:layout_width="5dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/watchlater" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="169dp"
+        android:text="Movie Information"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF" />
+
+
+</LinearLayout>
