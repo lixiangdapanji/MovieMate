@@ -7,9 +7,12 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.design.widget.TabLayout;
 import android.util.Log;
 
 import com.coen268.moviemate.data.MateContract.MateEntry;
+
+import static com.coen268.moviemate.data.MateContract.MateEntry.TABLE_NAME_MATE;
 
 /**
  * {@link ContentProvider} for Movie Mate app.
@@ -45,9 +48,9 @@ public class MateProvider extends ContentProvider {
 
         sUriMatcher.addURI(MateContract.CONTENT_AUTHORITY, MateContract.PATH_MATES + "/#", MATE_ID);
 
-        sUriMatcher.addURI(MateContract.CONTENT_AUTHORITY, MateContract.PATH_MATES, MATE_MOVIES);
-
-        sUriMatcher.addURI(MateContract.CONTENT_AUTHORITY, MateContract.PATH_MATES + "/#", MATE_MOVIE_ID);
+//        sUriMatcher.addURI(MateContract.CONTENT_AUTHORITY, MateContract.PATH_MATES, MATE_MOVIES);
+//
+//        sUriMatcher.addURI(MateContract.CONTENT_AUTHORITY, MateContract.PATH_MATES + "/#", MATE_MOVIE_ID);
     }
 
     /** Database helper object */
@@ -70,12 +73,13 @@ public class MateProvider extends ContentProvider {
 
         // Figure out if the URI matcher can match the URI to a specific code
         int match = sUriMatcher.match(uri);
+        Log.i(LOG_TAG, uri.toString() + "URI" + "match" + match);
         switch (match) {
             case MATES:
                 // For the MATES code, query the mate table directly with the given
                 // projection, selection, selection arguments, and sort order. The cursor
                 // could contain multiple rows of the mate table.
-                cursor = database.query(MateEntry.TABLE_NAME_MATE, projection, selection, selectionArgs,
+                cursor = database.query(TABLE_NAME_MATE, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
             case MATE_ID:
@@ -92,7 +96,7 @@ public class MateProvider extends ContentProvider {
 
                 // This will perform a query on the mate table where the _id equals 3 to return a
                 // Cursor containing that row of the table.
-                cursor = database.query(MateEntry.TABLE_NAME_MATE, projection, selection, selectionArgs,
+                cursor = database.query(TABLE_NAME_MATE, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
             default:
@@ -131,14 +135,14 @@ public class MateProvider extends ContentProvider {
         }
 
         String password = values.getAsString(MateEntry.COLUMN_MATE_PASSWORD);
-        if (password != null) {
+        if (password == null) {
             throw new IllegalArgumentException("User requires a password");
         }
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         // Insert the new mate with the given values
-        long id = database.insert(MateEntry.TABLE_NAME_MATE, null, values);
+        long id = database.insert(TABLE_NAME_MATE, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
@@ -235,7 +239,7 @@ public class MateProvider extends ContentProvider {
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         // Returns the number of database rows affected by the update statement
-        return database.update(MateEntry.TABLE_NAME_MATE, values, selection, selectionArgs);
+        return database.update(TABLE_NAME_MATE, values, selection, selectionArgs);
     }
 
     @Override
@@ -247,14 +251,14 @@ public class MateProvider extends ContentProvider {
         switch (match) {
             case MATES:
                 // Delete all rows that match the selection and selection args
-                return database.delete(MateEntry.TABLE_NAME_MATE, selection, selectionArgs);
+                return database.delete(TABLE_NAME_MATE, selection, selectionArgs);
             case MATE_ID:
                 // Delete a single row given by the ID in the URI
                 selection = MateEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                return database.delete(MateEntry.TABLE_NAME_MATE, selection, selectionArgs);
+                return database.delete(TABLE_NAME_MATE, selection, selectionArgs);
             case MATE_MOVIES:
-                return database.delete(MateEntry.TABLE_NAME_MATE, selection, selectionArgs);
+                return database.delete(TABLE_NAME_MATE, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
@@ -273,10 +277,6 @@ public class MateProvider extends ContentProvider {
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
-    }
-
-    public boolean checkUserExist(String toString, String toString1) {
-        return true;
     }
 }
 

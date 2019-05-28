@@ -25,6 +25,11 @@
         </activity>
         <activity android:name=".MovieInfoActivity">
         </activity>
+        <activity android:name=".NarBar"></activity>
+        <provider
+            android:name=".data.MateProvider"
+            android:authorities="com.coen268.moviemate"
+            android:exported="false" />
     </application>
 
 </manifest>

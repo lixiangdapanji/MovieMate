@@ -57,7 +57,7 @@ public final class MateContract {
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MATES;
 
         /** Name of database table for movie */
-        public final static String TABLE_NAME_MATE = "mate";
+        public final static String TABLE_NAME_MATE = "mates";
         public final static String TABLE_NAME_MATE_MOVIE = "mate_movie";
 
 

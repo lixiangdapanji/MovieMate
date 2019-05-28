@@ -36,7 +36,6 @@ public class MoviesActivity extends AppCompatActivity {
     List<Movie> movieList = new ArrayList<>();
     List<String> litImages = new ArrayList<>();
 
-
     Button nav;
     Intent intent;
 
