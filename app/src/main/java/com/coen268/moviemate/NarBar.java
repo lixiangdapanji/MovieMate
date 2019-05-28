@@ -15,7 +15,7 @@ public class NarBar extends AppCompatActivity {
     private DrawerLayout dl;
     private ActionBarDrawerToggle t;
     private NavigationView nv;
-    Intent secondIntent;
+    Intent secondIntent, goToHome, goSettings, goToProfile, goToSearch, loggedOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,11 @@ public class NarBar extends AppCompatActivity {
         setContentView(R.layout.menu);
 
         secondIntent = getIntent();
+        goToHome = new Intent(this, MoviesActivity.class);
+        goSettings = new Intent(this, Settings.class);
+        loggedOut = new Intent(this, SignInActivity.class);
+        goToProfile = new Intent(this, ProfilePage.class);
+        goToSearch = new Intent(this, SearchPage.class);
 
         dl = (DrawerLayout)findViewById(R.id.drawer);
         t = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
@@ -37,19 +42,31 @@ public class NarBar extends AppCompatActivity {
                 int id = item.getItemId();
                 switch(id)
                 {
+                    case R.id.search_option:
+                        startActivity(goToSearch);
+                        break;
+                    case R.id.discover:
+                        startActivity(goToHome);
+                        break;
                     case R.id.account:
-                        Toast.makeText(NarBar.this, "My Account",Toast.LENGTH_SHORT).show();break;
+                        startActivity(goToProfile);
+                        //Toast.makeText(NarBar.this, "My Account",Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.settings:
-                        Toast.makeText(NarBar.this, "Settings",Toast.LENGTH_SHORT).show();break;
+                        startActivity(goSettings);
+                        //Toast.makeText(NarBar.this, "Settings",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.logout:
+                        loggedOut.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(loggedOut);
+                        break;
                     default:
                         return true;
                 }
 
                 return true;
-
             }
         });
-
 
     }
 

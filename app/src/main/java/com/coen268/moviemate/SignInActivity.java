@@ -39,6 +39,7 @@ public class SignInActivity extends AppCompatActivity {
                 if(isExist){
                     Intent intent = new Intent(getApplicationContext(), MoviesActivity.class);
                     //intent.putExtra("username", username.getText().toString());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else {
                     password.setText(null);

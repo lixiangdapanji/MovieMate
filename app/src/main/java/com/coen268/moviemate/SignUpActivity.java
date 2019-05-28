@@ -42,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!password1.getText().toString().equals(password2.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Password shoud be match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Passwords should match", Toast.LENGTH_SHORT).show();
                 } else {
                     insertPet();
                     finish();
