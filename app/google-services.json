@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "953897984581",
+    "firebase_url": "https://moviematefcm.firebaseio.com",
+    "project_id": "moviematefcm",
+    "storage_bucket": "moviematefcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953897984581:android:bf0e45dd5736752b",
+        "android_client_info": {
+          "package_name": "com.coen268.moviemate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953897984581-cp8phkt6ckk0o5blbgu3fnavcufltm4t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coen268.moviemate",
+            "certificate_hash": "f101b552b450bf9a152c1381ab5fb192956e6dd3"
+          }
+        },
+        {
+          "client_id": "953897984581-rhabv0tpf4pclrqvpkpt9jk8512sbm9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUFjbpHsQXllP-Cbo-fOD-EbOluA9vy0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953897984581-rhabv0tpf4pclrqvpkpt9jk8512sbm9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
