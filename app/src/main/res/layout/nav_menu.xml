@@ -7,10 +7,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
+    <item android:id="@+id/search_option"
+        android:title="Search"/>
+    <item android:id="@+id/discover"
+        android:title="Discover"/>
     <item android:id="@+id/account"
-        android:title="My Account"/>
+        android:title="Profile"/>
     <item android:id="@+id/settings"
         android:title="Settings"/>
+    <item android:id="@+id/logout"
+        android:title="Logout"/>
 
 
 </menu>
