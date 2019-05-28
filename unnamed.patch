@@ -1,0 +1,374 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(date 1557980867000)
++++ app/build.gradle	(date 1559002128000)
+@@ -1,11 +1,13 @@
+ apply plugin: 'com.android.application'
++apply plugin: 'kotlin-android-extensions'
++apply plugin: 'kotlin-android'
+ 
+ android {
+-    compileSdkVersion 28
++    compileSdkVersion 27
+     defaultConfig {
+         applicationId "com.coen268.moviemate"
+         minSdkVersion 23
+-        targetSdkVersion 28
++        targetSdkVersion 27
+         versionCode 1
+         versionName "1.0"
+         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+@@ -16,13 +18,41 @@
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+         }
+     }
++    compileOptions {
++        sourceCompatibility = '1.8'
++    }
+ }
+ 
+ dependencies {
+     implementation fileTree(dir: 'libs', include: ['*.jar'])
+-    implementation 'com.android.support:appcompat-v7:28.0.0'
+-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+-    testImplementation 'junit:junit:4.12'
++    implementation 'com.android.support:appcompat-v26.0.0'
++    implementation 'com.android.support:support-compat:28.0.0'
++
++
++
++    implementation 'com.android.support.constraint:constraint-layout:2.0.0-beta1'
++    testImplementation 'junit:junit:4.13-beta-3'
+     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
++    implementation 'com.google.firebase:firebase-core:16.0.9'
++    implementation 'com.google.firebase:firebase-messaging:18.0.0'
++    implementation 'com.google.android.gms:play-services:12.0.1'
++    implementation 'com.google.firebase:firebase-messaging:18.0.0'
++    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+ }
++
++apply plugin: 'com.google.gms.google-services'
++repositories {
++    google()
++    maven {
++        url "https://maven.google.com"
++    }
++    mavenLocal()
++    mavenCentral()
++    jcenter()
++}
++
++configurations.all {
++    resolutionStrategy {
++        force 'com.android.support:support-v4:27.1.0'
++    }}
+Index: app/src/main/java/com/coen268/moviemate/GetDeviceToken.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/coen268/moviemate/GetDeviceToken.java	(date 1559000254000)
++++ app/src/main/java/com/coen268/moviemate/GetDeviceToken.java	(date 1559000254000)
+@@ -0,0 +1,18 @@
++package com.coen268.moviemate;
++
++import android.app.Service;
++import android.content.Intent;
++import android.os.IBinder;
++import android.util.Log;
++
++import com.google.firebase.iid.FirebaseInstanceId;
++import com.google.firebase.messaging.FirebaseMessagingService;
++
++public class GetDeviceToken extends FirebaseMessagingService {
++
++    @Override
++    public void onNewToken(String s) {
++        String device_token = FirebaseInstanceId.getInstance().getToken();
++        Log.d("Device Token: ", device_token);
++    }
++}
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(date 1557980867000)
++++ app/src/main/res/layout/activity_main.xml	(date 1559000427000)
+@@ -4,15 +4,16 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
++    android:padding="16dp"
+     tools:context=".MainActivity">
+ 
+     <TextView
++        android:id="@+id/textView2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:text="Hello World!"
++        android:text="Hello"
+         app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintLeft_toLeftOf="parent"
+-        app:layout_constraintRight_toRightOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+-
+ </android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+Index: app/google-services.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/google-services.json	(date 1558817360000)
++++ app/google-services.json	(date 1558817360000)
+@@ -0,0 +1,48 @@
++{
++  "project_info": {
++    "project_number": "953897984581",
++    "firebase_url": "https://moviematefcm.firebaseio.com",
++    "project_id": "moviematefcm",
++    "storage_bucket": "moviematefcm.appspot.com"
++  },
++  "client": [
++    {
++      "client_info": {
++        "mobilesdk_app_id": "1:953897984581:android:bf0e45dd5736752b",
++        "android_client_info": {
++          "package_name": "com.coen268.moviemate"
++        }
++      },
++      "oauth_client": [
++        {
++          "client_id": "953897984581-cp8phkt6ckk0o5blbgu3fnavcufltm4t.apps.googleusercontent.com",
++          "client_type": 1,
++          "android_info": {
++            "package_name": "com.coen268.moviemate",
++            "certificate_hash": "f101b552b450bf9a152c1381ab5fb192956e6dd3"
++          }
++        },
++        {
++          "client_id": "953897984581-rhabv0tpf4pclrqvpkpt9jk8512sbm9l.apps.googleusercontent.com",
++          "client_type": 3
++        }
++      ],
++      "api_key": [
++        {
++          "current_key": "AIzaSyDUFjbpHsQXllP-Cbo-fOD-EbOluA9vy0I"
++        }
++      ],
++      "services": {
++        "appinvite_service": {
++          "other_platform_oauth_client": [
++            {
++              "client_id": "953897984581-rhabv0tpf4pclrqvpkpt9jk8512sbm9l.apps.googleusercontent.com",
++              "client_type": 3
++            }
++          ]
++        }
++      }
++    }
++  ],
++  "configuration_version": "1"
++}
+\ No newline at end of file
+Index: app/src/main/java/com/coen268/moviemate/FCMNotification.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/coen268/moviemate/FCMNotification.java	(date 1558987146000)
++++ app/src/main/java/com/coen268/moviemate/FCMNotification.java	(date 1558987146000)
+@@ -0,0 +1,51 @@
++package com.coen268.moviemate;
++
++import android.app.NotificationManager;
++import android.app.PendingIntent;
++import android.app.Service;
++import android.content.Context;
++import android.content.Intent;
++import android.media.RingtoneManager;
++import android.net.Uri;
++import android.os.IBinder;
++import android.support.v4.app.NotificationCompat;
++
++import com.google.firebase.messaging.FirebaseMessagingService;
++import com.google.firebase.messaging.RemoteMessage;
++
++public class FCMNotification extends FirebaseMessagingService {
++
++    public static int NOTIFICATION_ID = 1;
++
++    @Override
++    public void onMessageReceived(RemoteMessage remoteMessage) {
++
++        generateMessageNotification(remoteMessage.getNotification().getBody(),remoteMessage.getNotification().getTitle());
++    }
++
++    public void generateMessageNotification(String body, String title) {
++        Intent intent = new Intent(this, MainActivity.class);
++        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
++
++        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
++
++        Uri soundURI = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
++
++        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
++                .setSmallIcon(R.mipmap.ic_launcher)
++                .setContentTitle(title)
++                .setContentText(body)
++                .setAutoCancel(true)
++                .setSound(soundURI)
++                .setContentIntent(pendingIntent);
++
++        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
++
++        if(NOTIFICATION_ID > 1073741824) {
++            NOTIFICATION_ID = 0;
++        }
++
++        notificationManager.notify(NOTIFICATION_ID++, notificationBuilder.build());
++
++    }
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(date 1557980867000)
++++ .idea/misc.xml	(date 1558818128000)
+@@ -26,7 +26,7 @@
+       </profile-state>
+     </entry>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(date 1557980867000)
++++ build.gradle	(date 1559001870000)
+@@ -1,14 +1,18 @@
+ // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ 
+ buildscript {
++    ext.kotlin_version = '1.3.31'
+     repositories {
+         google()
+         jcenter()
+         
+     }
+     dependencies {
+-        classpath 'com.android.tools.build:gradle:3.4.0'
+-        
++        classpath 'com.android.tools.build:gradle:3.4.1'
++
++        classpath 'com.google.gms:google-services:4.2.0'
++        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
++
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+     }
+@@ -16,12 +20,21 @@
+ 
+ allprojects {
+     repositories {
++        maven {
++            url "https://maven.google.com"
++        }
++        mavenLocal()
++        mavenCentral()
+         google()
+         jcenter()
+-        
+     }
+ }
+ 
+ task clean(type: Delete) {
+     delete rootProject.buildDir
+ }
++
++configurations.all {
++    resolutionStrategy {
++        force 'com.android.support:support-v4:27.1.0'
++    }}
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(date 1557980867000)
++++ app/src/main/AndroidManifest.xml	(date 1559000254000)
+@@ -2,6 +2,9 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="com.coen268.moviemate">
+ 
++    <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.VIBRATE" />
++
+     <application
+         android:allowBackup="true"
+         android:icon="@mipmap/ic_launcher"
+@@ -9,6 +12,15 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
++        <service
++            android:name=".GetDeviceToken"
++            android:enabled="false"
++            android:exported="false"></service>
++        <service
++            android:name=".FCMNotification"
++            android:enabled="false"
++            android:exported="false" />
++
+         <activity android:name=".MainActivity">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+@@ -16,6 +28,7 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
++
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(date 1557980867000)
++++ .idea/gradle.xml	(date 1558819345000)
+@@ -3,11 +3,14 @@
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+-        <compositeConfiguration>
+-          <compositeBuild compositeDefinitionSource="SCRIPT" />
+-        </compositeConfiguration>
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++            <option value="$PROJECT_DIR$/app" />
++          </set>
++        </option>
+         <option name="resolveModulePerSourceSet" value="false" />
+       </GradleProjectSettings>
+     </option>
