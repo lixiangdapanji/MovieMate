@@ -120,6 +120,8 @@ public class MoviesActivity extends AppCompatActivity {
             HorizontalInfiniteCycleViewPager pager = findViewById(R.id.horiontal_cycle);
             MovieAdapter adapter = new MovieAdapter(litImages, listIds, getBaseContext());
             pager.setAdapter(adapter);
+
+
         }
     }
 

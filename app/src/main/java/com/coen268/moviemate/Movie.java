@@ -64,7 +64,8 @@ public class Movie {
      */
     public Movie(long id,
                  String title,
-                 String overview,String releaseDate,
+                 String overview,
+                 String releaseDate,
                  String posterPath,
                  String trailerPath,
                  List<String> subscribeAvailable) {

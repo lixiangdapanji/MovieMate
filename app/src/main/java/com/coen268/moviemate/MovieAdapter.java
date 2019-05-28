@@ -77,7 +77,7 @@ public class MovieAdapter extends PagerAdapter {
                 long id = movieIds.get(position);
                 Log.i(LOG_TAG, "id is" + id);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("id",id);
+                //intent.putExtra("id",id);
                 context.startActivity(intent);
             }
         });
