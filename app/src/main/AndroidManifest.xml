@@ -19,13 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MoviesActivity">
-        </activity>
-        <activity android:name=".SignUpActivity">
-        </activity>
-        <activity android:name=".MovieInfoActivity">
-        </activity>
+        <activity android:name=".MoviesActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".MovieInfoActivity"></activity>
         <activity android:name=".NarBar"></activity>
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".ProfilePage"></activity>
+        <activity android:name=".SearchPage"></activity>
         <provider
             android:name=".data.MateProvider"
             android:authorities="com.coen268.moviemate"
