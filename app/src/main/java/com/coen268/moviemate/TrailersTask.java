@@ -46,9 +46,6 @@
 //
 //        try {
 //
-//            /** URL for one movie data */
-//            final String MOVIE_TRAILER_URL =
-//                    "https://api.themoviedb.org/3/movie/" + movie_id + "?api_key=" + API_KEY + "&append_to_response=videos";
 //
 //            URL url;
 //            url = new URL(MOVIE_TRAILER_URL);

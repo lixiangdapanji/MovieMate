@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +23,19 @@ import java.util.List;
  * to be displayed to the user.
  */
 public class MovieAdapter extends PagerAdapter {
+
+    private static final String LOG_TAG = MovieAdapter.class.getName();
+
     List<String> listImages;
+    List<Long> movieIds;
     Context context;
     LayoutInflater layoutInflater;
 
-    public MovieAdapter(List<String> listImages, Context context) {
+    public MovieAdapter(List<String> listImages, List<Long> movieIds, Context context) {
         this.listImages = listImages;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
+        this.movieIds = movieIds;
     }
 
     @Override
@@ -48,12 +54,11 @@ public class MovieAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
-
-
     /**fetch the images with Picasso from URL
      * */
+
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         LayoutInflater inflater = (LayoutInflater) container.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.moive_list_item,null);
         ((ViewPager) container).addView(view);
@@ -69,7 +74,10 @@ public class MovieAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(context, MovieInfoActivity.class);
-                intent.putExtra("your_extra","your_class_value");
+                long id = movieIds.get(position);
+                Log.i(LOG_TAG, "id is" + id);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("id",id);
                 context.startActivity(intent);
             }
         });

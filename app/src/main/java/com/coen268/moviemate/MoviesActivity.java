@@ -32,9 +32,9 @@ public class MoviesActivity extends AppCompatActivity {
     private static final String SIMILAR_MOIVES_URL =
             "https://api.themoviedb.org/3/movie/" + movie_id +"/similar?api_key=" + API_KEY + "&page=2";
 
-
     List<Movie> movieList = new ArrayList<>();
     List<String> litImages = new ArrayList<>();
+    List<Long> listIds = new ArrayList<>();
 
     Button nav;
     Intent intent;
@@ -57,7 +57,6 @@ public class MoviesActivity extends AppCompatActivity {
         });
 
         new FetchMovies().execute();
-
     }
 
     //AsyncTask
@@ -69,7 +68,6 @@ public class MoviesActivity extends AppCompatActivity {
            // mProgressBar.setVisibility(View.VISIBLE);
         }
 
-
         @Override
         protected Void doInBackground(Void... voids) {
 
@@ -80,7 +78,7 @@ public class MoviesActivity extends AppCompatActivity {
                 movieList = QueryUtils.fetchPopularMovieDate(POPULAR_MOIVES_URL);
                 /**Get all the posters from the movie list*/
                 getPosterList(movieList);
-
+                getIdList(movieList);
             }else{
                 AlertDialog.Builder dialog = new AlertDialog.Builder(MoviesActivity.this);
                 dialog.setTitle("No network connection");
@@ -98,6 +96,12 @@ public class MoviesActivity extends AppCompatActivity {
             }
         }
 
+        private void getIdList(List<Movie> movieList) {
+            for (Movie m : movieList) {
+                listIds.add(m.id);
+            }
+        }
+
         public  Boolean networkStatus(Context context){
             ConnectivityManager manager = (ConnectivityManager)
                     context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -108,14 +112,13 @@ public class MoviesActivity extends AppCompatActivity {
             return false;
         }
 
-
         @Override
         protected void onPostExecute(Void  s) {
             super.onPostExecute(s);
             //mProgressBar.setVisibility(View.INVISIBLE);
             //Load popular movies by default
             HorizontalInfiniteCycleViewPager pager = findViewById(R.id.horiontal_cycle);
-            MovieAdapter adapter = new MovieAdapter(litImages, getBaseContext());
+            MovieAdapter adapter = new MovieAdapter(litImages, listIds, getBaseContext());
             pager.setAdapter(adapter);
         }
     }
